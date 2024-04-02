@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerControlManager : MonoBehaviour
 {
+    public static PlayerControlManager instance;
+
     // Start is called before the first frame update
     [SerializeField] Vector2 movementInput;
     [SerializeField] float verticalInput;
     [SerializeField] float horizontalInput;
-    [SerializeField] float moveAmount;
+    public float moveAmount;
     void Start()
     {
         
