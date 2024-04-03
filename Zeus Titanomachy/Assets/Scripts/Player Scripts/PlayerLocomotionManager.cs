@@ -16,11 +16,11 @@ namespace SG
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
 
-        protected override void Awake()
+        /*protected override void Awake()
         {
             base.Awake();
             player = GetComponent<PlayerManager>();
-        }
+        }*/
         public void HandleAllMovement()
         {
 
