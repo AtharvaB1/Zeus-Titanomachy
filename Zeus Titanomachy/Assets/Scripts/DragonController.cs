@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
-    public GameObject[] pathArray;
-    public GameObject[] checkpointArray;
     private Animator anim;
     int IdleSimple;
     int IdleAgressive;
@@ -37,6 +35,50 @@ public class DragonController : MonoBehaviour
         TakeOff = Animator.StringToHash("TakeOff");
         Die = Animator.StringToHash("Die");
 
+    }
+
+
+    // Specific actions for different checkpoints
+    public void firstCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the first checkpoint
+        Debug.Log("Performing action for first checkpoint");
+        // Add your specific actions here
+    }
+
+    public void secondCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the second checkpoint
+        Debug.Log("Performing action for second checkpoint");
+        // Add your specific actions here
+    }
+
+    public void thirdCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the third checkpoint
+        Debug.Log("Performing action for third checkpoint");
+        // Add your specific actions here
+    }
+
+    public void fourthCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the fourth checkpoint
+        Debug.Log("Performing action for fourth checkpoint");
+        // Add your specific actions here
+    }
+
+    public void fifthCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the fifth checkpoint
+        Debug.Log("Performing action for fifth checkpoint");
+        // Add your specific actions here
+    }
+
+    public void sixthCheckpointAction()
+    {
+        // Example: Trigger specific animation or action for the sixth checkpoint
+        Debug.Log("Performing action for sixth checkpoint");
+        // Add your specific actions here
     }
 
     // Update is called once per frame

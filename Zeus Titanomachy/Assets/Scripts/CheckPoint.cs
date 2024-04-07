@@ -63,27 +63,27 @@ public class CheckPoint : MonoBehaviour
         {
             case 0:
                 Debug.Log("Dragon action for checkpoint 1");
-                // Perform specific action for checkpoint 1
+                dragon.firstCheckpointAction();
                 break;
             case 1:
                 Debug.Log("Dragon action for checkpoint 2");
-                
+                dragon.secondCheckpointAction();
                 break;
             case 2:
                 Debug.Log("Dragon action for checkpoint 3");
-                
+                dragon.thirdCheckpointAction();
                 break;
             case 3:
                 Debug.Log("Dragon action for checkpoint 4");
-                
+                dragon.fourthCheckpointAction();
                 break;
             case 4:
                 Debug.Log("Dragon action for checkpoint 5");
-                
+                dragon.fifthCheckpointAction();
                 break;
             case 5:
-                Debug.Log("Dragon action for checkpoint 5");
-                
+                Debug.Log("Dragon action for checkpoint 6");
+                dragon.sixthCheckpointAction();
                 break;
         }
     }
