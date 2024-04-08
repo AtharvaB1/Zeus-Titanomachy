@@ -43,6 +43,7 @@ public class DragonController : MonoBehaviour
     {
         // Example: Trigger specific animation or action for the first checkpoint
         Debug.Log("Performing action for first checkpoint");
+        anim.SetBool(Hover, true);
         // Add your specific actions here
     }
 
@@ -82,6 +83,7 @@ public class DragonController : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -106,5 +108,6 @@ public class DragonController : MonoBehaviour
         }
 
     }
+    */
 }
 

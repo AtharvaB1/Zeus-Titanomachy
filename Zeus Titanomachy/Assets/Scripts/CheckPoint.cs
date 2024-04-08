@@ -14,7 +14,7 @@ public class CheckPoint : MonoBehaviour
     {
         { 0, 10f },   // First path falls by 10 units
         { 1, 15f },   // Second path falls by 15 units
-        { 2, 47f },   // Third path falls by 47 units
+        { 2, 40f },   // Third path falls by 47 units
         { 3, 60f },   // Fourth path falls by 60 units
         { 4, 75f },   // Fifth path falls by 75 units
         { 5, 80f }    // Sixth path falls by 80 units
@@ -27,28 +27,51 @@ public class CheckPoint : MonoBehaviour
             // Trigger the dragon's action immediately
             TriggerDragonAction(currentCheckpointIndex);
 
-            // Increment the checkpoint index to move to the next checkpoint
-            currentCheckpointIndex++;
-
             // Check if there are more checkpoints to process
             if (currentCheckpointIndex < pathGroups.Length)
             {
                 // Start a coroutine to move the path group after a delay
                 StartCoroutine(MovePathGroupDelayed(pathGroups[currentCheckpointIndex], currentCheckpointIndex));
             }
+
+            // Increment the checkpoint index to move to the next checkpoint
+            currentCheckpointIndex++;
         }
     }
 
     private IEnumerator MovePathGroupDelayed(Transform pathGroup, int pathIndex)
     {
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        float delayDuration = 5f; // Delay duration before starting movement
+        float fallingDuration = 4f; // Total time for the path group to fall
+        float elapsedTime = 0f; // Time elapsed since start of coroutine
+
+        // Wait for the delay duration before starting the movement
+        yield return new WaitForSeconds(delayDuration);
 
         // Check if the pathIndex exists in the pathFallingAmounts dictionary
         if (pathFallingAmounts.ContainsKey(pathIndex))
         {
             float fallingAmount = pathFallingAmounts[pathIndex];
-            // Move the path group down on the Y-axis by the specified falling amount
-            pathGroup.position -= new Vector3(0f, fallingAmount, 0f);
+            Vector3 startPosition = pathGroup.position;
+            Vector3 targetPosition = startPosition - new Vector3(0f, fallingAmount, 0f);
+
+            while (elapsedTime < fallingDuration)
+            {
+                // Calculate interpolation parameter (0 to 1) based on elapsed time
+                float t = elapsedTime / fallingDuration;
+
+                // Interpolate position using Lerp
+                pathGroup.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+                // Increment elapsed time
+                elapsedTime += Time.deltaTime;
+
+                // Wait for the next frame
+                yield return null;
+            }
+
+            // Ensure final position is exactly the target position
+            pathGroup.position = targetPosition;
         }
         else
         {
