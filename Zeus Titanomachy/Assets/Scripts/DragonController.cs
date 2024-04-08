@@ -41,11 +41,53 @@ public class DragonController : MonoBehaviour
     // Specific actions for different checkpoints
     public void firstCheckpointAction()
     {
-        // Example: Trigger specific animation or action for the first checkpoint
-        Debug.Log("Performing action for first checkpoint");
-        anim.SetBool(Hover, true);
-        // Add your specific actions here
+        // Rotate the dragon 60 degrees counterclockwise over 1 second
+        StartCoroutine(RotateDragonCoroutine(-60f, 1f));
+
+        // Trigger the "Hover" animation
+        anim.SetBool("Hover", true);
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleAgressiveAfterHover(1f));
     }
+
+    // Coroutine to rotate the dragon over time
+    private IEnumerator RotateDragonCoroutine(float targetAngle, float duration)
+    {
+        float currentAngle = transform.eulerAngles.y;
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Calculate the interpolation factor (0 to 1)
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            // Interpolate rotation smoothly
+            float newAngle = Mathf.LerpAngle(currentAngle, currentAngle + targetAngle, t);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newAngle, transform.eulerAngles.z);
+
+            yield return null;
+        }
+
+        // Ensure the rotation ends exactly at the target angle
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentAngle + targetAngle, transform.eulerAngles.z);
+    }
+
+    // Coroutine to stop the "Hover" animation after a delay
+    private IEnumerator ReturnToIdleAgressiveAfterHover(float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Stop the "Hover" animation
+        anim.SetBool("Hover", false);
+
+        // Transition back to IdleAgressive (assuming "IdleAgressive" is a trigger parameter)
+        anim.SetTrigger("IdleAgressive");
+    }
+
 
     public void secondCheckpointAction()
     {
