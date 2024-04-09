@@ -8,7 +8,7 @@ public class BirdController : MonoBehaviour
     public float YawAmount = 1;
     public float PitchAmount = 1;
     public float xVelocity, yVelocity, 
-                    zVelocity = 3;
+                    zVelocity = 1;
 
 
     private float Yaw;
@@ -22,7 +22,7 @@ public class BirdController : MonoBehaviour
 
         xVelocity += Input.GetAxis("Horizontal");
         yVelocity += Input.GetAxis("Vertical");
-        zVelocity = 0;
+        zVelocity = 1;
 
         xVelocity /= 2;
         yVelocity /= 2;
