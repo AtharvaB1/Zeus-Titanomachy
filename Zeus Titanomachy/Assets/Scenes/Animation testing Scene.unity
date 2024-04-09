@@ -227,22 +227,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 204340450827362776, guid: 1163f7b7e8ba4ce4abc1360372d9c0ed, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 204340450827362776, guid: 1163f7b7e8ba4ce4abc1360372d9c0ed, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 204340450827362776, guid: 1163f7b7e8ba4ce4abc1360372d9c0ed, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 204340451424976026, guid: 1163f7b7e8ba4ce4abc1360372d9c0ed, type: 3}
-      propertyPath: m_Weight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6091663568687144487, guid: 1163f7b7e8ba4ce4abc1360372d9c0ed, type: 3}
       propertyPath: m_Name
       value: Zeus
