@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckPoint : MonoBehaviour
 {
     public DragonController dragon;         // Reference to the Dragon GameObject
     public Transform[] pathGroups; // Array of path group Transforms to move
 
-    private int currentCheckpointIndex = 0; // Index of the current checkpoint in relation to pathGroups
+    public int currentCheckpointIndex = 0; // Index of the current checkpoint in relation to pathGroups
+    public ParticleSystem particles;      // Reference to the ParticleSystem
+    private bool particleSystemActivated = false;
+    public GameObject restartColliderObject;
 
     // Dictionary to map path group index to specific falling amount
     private Dictionary<int, float> pathFallingAmounts = new Dictionary<int, float>()
@@ -20,6 +24,20 @@ public class CheckPoint : MonoBehaviour
         { 5, 80f }    // Sixth path falls by 80 units
     };
 
+    private void Start()
+    {
+        // Check if a ParticleSystem is assigned and deactivate it at the start of the game
+        if (particles != null)
+        {
+            particles.Stop(); // Stop the ParticleSystem
+        }
+
+        if (restartColliderObject != null)
+        {
+            restartColliderObject.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -27,15 +45,24 @@ public class CheckPoint : MonoBehaviour
             // Trigger the dragon's action immediately
             TriggerDragonAction(currentCheckpointIndex);
 
+            if (currentCheckpointIndex == 0 && !particleSystemActivated && particles != null)
+            {
+                // Activate and play the ParticleSystem
+                particles.Play();
+                particleSystemActivated = true;
+
+                if (restartColliderObject != null)
+                {
+                    restartColliderObject.SetActive(true);
+                }
+            }
+
             // Check if there are more checkpoints to process
             if (currentCheckpointIndex < pathGroups.Length)
             {
                 // Start a coroutine to move the path group after a delay
                 StartCoroutine(MovePathGroupDelayed(pathGroups[currentCheckpointIndex], currentCheckpointIndex));
             }
-
-            // Increment the checkpoint index to move to the next checkpoint
-            currentCheckpointIndex++;
         }
     }
 

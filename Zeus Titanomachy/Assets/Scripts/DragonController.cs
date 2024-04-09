@@ -82,10 +82,8 @@ public class DragonController : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Stop the "Hover" animation
-        anim.SetBool("Hover", false);
+        anim.SetBool("FlyingAttack", true);
 
-        // Transition back to IdleAgressive (assuming "IdleAgressive" is a trigger parameter)
-        anim.SetTrigger("IdleAgressive");
     }
 
 

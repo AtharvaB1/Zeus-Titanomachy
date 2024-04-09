@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/actual_scene.unity
     guid: 966ddccd081c62647a681264c46b72ed
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Mine.unity
     guid: 39524e5cc8e3b4e4a8a1933ccacfdeba
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DrFight.unity
     guid: 988206bd1fdcc3d498114fa6cfa6140b
   m_configObjects: {}
