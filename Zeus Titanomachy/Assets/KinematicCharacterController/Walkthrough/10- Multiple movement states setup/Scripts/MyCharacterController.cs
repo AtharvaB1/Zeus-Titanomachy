@@ -68,7 +68,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
         private Vector3 _internalVelocityAdd = Vector3.zero;
         private bool _shouldBeCrouching = false;
         private bool _isCrouching = false;
-
+        Animator animator;
         private void Start()
         {
             // Assign to motor
@@ -76,6 +76,24 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
 
             // Handle initial state
             TransitionToState(CharacterState.Default);
+            animator = GetComponent<Animator>();
+        }
+        private void Update()
+        {
+            animator.SetFloat("front", Input.GetAxis("Vertical"));
+            animator.SetFloat("side", Input.GetAxis("Horizontal"));
+            if (Input.GetKeyDown(KeyCode.F))
+            dash();
+        }
+
+        public void dash()
+        {
+                
+        }
+
+        public void sprint()
+        {
+
         }
 
         /// <summary>
