@@ -26,7 +26,7 @@ public class charfollow : MonoBehaviour
         }
         else
         {
-            this.transform.position = new Vector3(zeus.transform.position.x-7,zeus.transform.position.y+13,zeus.transform.position.z-3);
+            this.transform.position = new Vector3(zeus.transform.position.x-3,zeus.transform.position.y+10,zeus.transform.position.z-13);
             //really scuffed, fix rotate again
         }
         if (kYes && Input.GetKeyDown(KeyCode.L))

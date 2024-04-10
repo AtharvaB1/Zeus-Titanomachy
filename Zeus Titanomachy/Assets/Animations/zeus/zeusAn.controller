@@ -132,11 +132,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 519738379745678075}
-    m_Position: {x: 100, y: 250, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 1204142887918054529}
-    m_Position: {x: 440, y: -70, z: 0}
+    m_Position: {x: -40, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1613893658342801462}
     m_Position: {x: 520, y: 20, z: 0}
@@ -151,7 +148,7 @@ AnimatorStateMachine:
     m_Position: {x: 190, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2155061111829131609}
-    m_Position: {x: -20, y: -60, z: 0}
+    m_Position: {x: 390, y: -90, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1324616593571066936}
@@ -163,11 +160,11 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 70, y: 30, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_AnyStatePosition: {x: 140, y: 50, z: 0}
+  m_EntryPosition: {x: -20, y: 110, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 519738379745678075}
+  m_DefaultState: {fileID: 1204142887918054529}
 --- !u!1102 &-2155061111829131609
 AnimatorState:
   serializedVersion: 6
@@ -229,13 +226,13 @@ AnimatorController:
   m_Name: zeusAn
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: For
+  - m_Name: front
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Back
+  - m_Name: side
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
