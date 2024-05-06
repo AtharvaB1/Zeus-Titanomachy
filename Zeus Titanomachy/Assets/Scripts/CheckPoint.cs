@@ -17,11 +17,11 @@ public class CheckPoint : MonoBehaviour
     private Dictionary<int, float> pathFallingAmounts = new Dictionary<int, float>()
     {
         { 0, 10f },   // First path falls by 10 units
-        { 1, 15f },   // Second path falls by 15 units
-        { 2, 40f },   // Third path falls by 47 units
+        { 1, 25f },   // Second path falls by 15 units
+        { 2, 50f },   // Third path falls by 47 units
         { 3, 60f },   // Fourth path falls by 60 units
         { 4, 75f },   // Fifth path falls by 75 units
-        { 5, 80f }    // Sixth path falls by 80 units
+        { 5, 90f }    // Sixth path falls by 80 units
     };
 
     private void Start()
