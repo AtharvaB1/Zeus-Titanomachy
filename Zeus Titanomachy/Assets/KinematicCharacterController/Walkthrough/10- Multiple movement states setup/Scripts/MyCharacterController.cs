@@ -69,8 +69,11 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
         private bool _shouldBeCrouching = false;
         private bool _isCrouching = false;
         Animator animator;
-        float dashCool = 0f;
-        float dashing = 0f;
+
+        [Header("MyCodes")]
+        public float dashCool = 0f;
+        public bool slowboi;
+        public float dashing = 0f;
         private void Start()
         {
             // Assign to motor
@@ -96,10 +99,32 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
             if (Input.GetKeyDown(KeyCode.F))
             dash(dashCool);
             Debug.Log(dashCool);
-            if (Input.GetKey(KeyCode.LeftShift))
-                animator.SetBool("Run", true);
-            else
-                animator.SetBool("Run", false);
+            if (!slowboi)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    animator.SetBool("Run", true);
+                    MaxStableMoveSpeed = 20f;
+                }
+                else
+                {
+                    animator.SetBool("Run", false);
+                    MaxStableMoveSpeed = 10f;
+                }
+            } else
+            {
+                MaxAirMoveSpeed = 5f;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    animator.SetBool("Run", true);
+                    MaxStableMoveSpeed = 10f;
+                }
+                else
+                {
+                    animator.SetBool("Run", false);
+                    MaxStableMoveSpeed = 5f;
+                }
+            }
         }
 
         public void dash(float t)
