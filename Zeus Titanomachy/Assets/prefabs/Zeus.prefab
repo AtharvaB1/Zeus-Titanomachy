@@ -260,9 +260,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 4.88
+  m_Height: 5.16
   m_Direction: 1
-  m_Center: {x: 0, y: 2.64, z: 0}
+  m_Center: {x: 0, y: 2.43, z: 0}
 --- !u!114 &204340451691329647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,8 +693,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Capsule: {fileID: 204340451691329681}
   CapsuleRadius: 0.5
-  CapsuleHeight: 4.88
-  CapsuleYOffset: 2.64
+  CapsuleHeight: 5.16
+  CapsuleYOffset: 2.43
   CapsulePhysicsMaterial: {fileID: 0}
   GroundDetectionExtraDistance: 0
   MaxStableSlopeAngle: 60
@@ -746,15 +746,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6d3aff19b07996419115bb18c3fa03d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -246.35045
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6d3aff19b07996419115bb18c3fa03d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6d3aff19b07996419115bb18c3fa03d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 173.32
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6d3aff19b07996419115bb18c3fa03d, type: 3}
       propertyPath: m_LocalRotation.w
