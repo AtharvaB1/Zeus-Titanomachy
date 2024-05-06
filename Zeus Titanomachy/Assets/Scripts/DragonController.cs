@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DragonController : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem particleEffect;
     private Animator anim;
     int IdleSimple;
     int IdleAgressive;
@@ -20,6 +21,10 @@ public class DragonController : MonoBehaviour
     int Die;
     void Start()
     {
+        if (particleEffect != null)
+        {
+            particleEffect.Stop();
+        }
         anim = GetComponent<Animator>();
         IdleSimple = Animator.StringToHash("IdleSimple");
         IdleAgressive = Animator.StringToHash("IdleAgressive");
@@ -41,51 +46,16 @@ public class DragonController : MonoBehaviour
     // Specific actions for different checkpoints
     public void firstCheckpointAction()
     {
-        // Rotate the dragon 60 degrees counterclockwise over 1 second
-        StartCoroutine(RotateDragonCoroutine(-60f, 1f));
+        // Rotate the dragon degrees counterclockwise over 1 second
+        StartCoroutine(RotateDragonCoroutine(-30f, 10f, 1f));
 
-        // Trigger the "Hover" animation
-        anim.SetBool("Hover", true);
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
 
         // Wait for 1 second
-        StartCoroutine(ReturnToIdleAgressiveAfterHover(1f));
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 2f));
     }
-
-    // Coroutine to rotate the dragon over time
-    private IEnumerator RotateDragonCoroutine(float targetAngle, float duration)
-    {
-        float currentAngle = transform.eulerAngles.y;
-        float startTime = Time.time;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            // Calculate the interpolation factor (0 to 1)
-            elapsedTime = Time.time - startTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            // Interpolate rotation smoothly
-            float newAngle = Mathf.LerpAngle(currentAngle, currentAngle + targetAngle, t);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newAngle, transform.eulerAngles.z);
-
-            yield return null;
-        }
-
-        // Ensure the rotation ends exactly at the target angle
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentAngle + targetAngle, transform.eulerAngles.z);
-    }
-
-    // Coroutine to stop the "Hover" animation after a delay
-    private IEnumerator ReturnToIdleAgressiveAfterHover(float delay)
-    {
-        // Wait for the specified delay
-        yield return new WaitForSeconds(delay);
-
-        // Stop the "Hover" animation
-        anim.SetBool("FlyingAttack", true);
-
-    }
-
 
     public void secondCheckpointAction()
     {
@@ -122,32 +92,55 @@ public class DragonController : MonoBehaviour
         // Add your specific actions here
     }
 
-    // Update is called once per frame
-    /*
-    void Update()
+    public void dieKekw()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("IdleSimple"))
-            {
-                anim.SetBool(IdleSimple, false);
-                anim.SetBool(IdleAgressive, false);
-                anim.SetBool(IdleRestless, false);
-                anim.SetBool(Walk, true);
-                anim.SetBool(BattleStance, false);
-                anim.SetBool(Bite, false);
-                anim.SetBool(Drakaris, false);
-                anim.SetBool(FlyingFWD, false);
-                anim.SetBool(FlyingAttack, false);
-                anim.SetBool(Hover, false);
-                anim.SetBool(Lands, false);
-                anim.SetBool(TakeOff, false);
-                anim.SetBool(Die, false);
+        anim.SetBool("IdleSimple", false);
+        anim.SetBool("Die", true);
+    }
 
-            }
+    // Coroutine to rotate the dragon over time
+    private IEnumerator RotateDragonCoroutine(float targetAngle, float targetYOffset, float duration)
+    {
+        float currentAngle = transform.eulerAngles.y;
+        float startY = transform.position.y;
+        float startTime = Time.time;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Calculate the interpolation factor (0 to 1)
+            elapsedTime = Time.time - startTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            // Interpolate rotation smoothly
+            float newAngle = Mathf.LerpAngle(currentAngle, currentAngle + targetAngle, t);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newAngle, transform.eulerAngles.z);
+
+            // Interpolate Y position smoothly
+            float newY = Mathf.Lerp(startY, startY + targetYOffset, t);
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+            yield return null;
         }
 
+        // Ensure the rotation ends exactly at the target angle
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentAngle + targetAngle, transform.eulerAngles.z);
+
+        // Ensure the position ends exactly at the target Y offset
+        transform.position = new Vector3(transform.position.x, startY + targetYOffset, transform.position.z);
     }
-    */
+
+    // Coroutine to stop the "Hover" animation after a delay
+    private IEnumerator ReturnToIdleSimpleAfterDelay(string orig, float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Stop the "Hover" animation
+        particleEffect.Stop();
+        anim.SetBool(orig, false);
+        anim.SetBool("IdleSimple", true);
+
+    }
 }
 

@@ -63,12 +63,13 @@ public class CheckPoint : MonoBehaviour
                 // Start a coroutine to move the path group after a delay
                 StartCoroutine(MovePathGroupDelayed(pathGroups[currentCheckpointIndex], currentCheckpointIndex));
             }
+            currentCheckpointIndex++;
         }
     }
 
     private IEnumerator MovePathGroupDelayed(Transform pathGroup, int pathIndex)
     {
-        float delayDuration = 5f; // Delay duration before starting movement
+        float delayDuration = 7f; // Delay duration before starting movement
         float fallingDuration = 4f; // Total time for the path group to fall
         float elapsedTime = 0f; // Time elapsed since start of coroutine
 
@@ -117,23 +118,23 @@ public class CheckPoint : MonoBehaviour
                 break;
             case 1:
                 Debug.Log("Dragon action for checkpoint 2");
-                dragon.firstCheckpointAction();
+                dragon.secondCheckpointAction();
                 break;
             case 2:
                 Debug.Log("Dragon action for checkpoint 3");
-                dragon.firstCheckpointAction(); ;
+                dragon.thirdCheckpointAction(); ;
                 break;
             case 3:
                 Debug.Log("Dragon action for checkpoint 4");
-                dragon.firstCheckpointAction();
+                dragon.fourthCheckpointAction();
                 break;
             case 4:
                 Debug.Log("Dragon action for checkpoint 5");
-                dragon.firstCheckpointAction();
+                dragon.fifthCheckpointAction();
                 break;
             case 5:
                 Debug.Log("Dragon action for checkpoint 6");
-                dragon.firstCheckpointAction();
+                dragon.sixthCheckpointAction();
                 break;
         }
     }

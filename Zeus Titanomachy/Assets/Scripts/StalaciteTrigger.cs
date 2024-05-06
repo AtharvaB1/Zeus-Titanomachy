@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StalaciteTrigger : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class StalaciteTrigger : MonoBehaviour
     [SerializeField] private GameObject turnOff;
     [SerializeField] private ParticleSystem particlesOff;
     [SerializeField] private GameObject obj;
+    [SerializeField] private GameObject text;
+    [SerializeField] private DragonController dragon;
     private MeshCollider meshCollider;
     private bool isMoving = false;
     private float startY;
@@ -54,6 +57,11 @@ public class StalaciteTrigger : MonoBehaviour
                 isMoving = false;
             }
         }
+        if (stalactite.transform.position.y < -10f)
+        {
+            // Play the dieKekw animation
+            dragon.dieKekw();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -69,6 +77,7 @@ public class StalaciteTrigger : MonoBehaviour
                 {
                     meshCollider.enabled = true;
                 }
+                text.SetActive(false);
             }
         }
     }
