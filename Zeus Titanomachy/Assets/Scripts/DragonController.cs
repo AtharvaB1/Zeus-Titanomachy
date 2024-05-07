@@ -54,9 +54,6 @@ public class DragonController : MonoBehaviour
     // Specific actions for different checkpoints
     public void firstCheckpointAction()
     {
-        // Rotate the dragon degrees counterclockwise over 1 second
-        StartCoroutine(RotateDragonCoroutine(-30f, 10f, 1f));
-
         // Trigger the animation
         anim.SetBool("Drakaris", true);
         particleEffect.Play();
@@ -121,38 +118,6 @@ public class DragonController : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
             }
         }
-    }
-
-    // Coroutine to rotate the dragon over time
-    private IEnumerator RotateDragonCoroutine(float targetAngle, float targetYOffset, float duration)
-    {
-        float currentAngle = transform.eulerAngles.y;
-        float startY = transform.position.y;
-        float startTime = Time.time;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            // Calculate the interpolation factor (0 to 1)
-            elapsedTime = Time.time - startTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-
-            // Interpolate rotation smoothly
-            float newAngle = Mathf.LerpAngle(currentAngle, currentAngle + targetAngle, t);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newAngle, transform.eulerAngles.z);
-
-            // Interpolate Y position smoothly
-            float newY = Mathf.Lerp(startY, startY + targetYOffset, t);
-            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-
-            yield return null;
-        }
-
-        // Ensure the rotation ends exactly at the target angle
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentAngle + targetAngle, transform.eulerAngles.z);
-
-        // Ensure the position ends exactly at the target Y offset
-        transform.position = new Vector3(transform.position.x, startY + targetYOffset, transform.position.z);
     }
 
     // Coroutine to stop the "Hover" animation after a delay
