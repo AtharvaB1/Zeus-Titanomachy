@@ -38,6 +38,10 @@ namespace KinematicCharacterController.Examples
         public float ObstructionSharpness = 10000f;
         public List<Collider> IgnoredColliders = new List<Collider>();
 
+        private bool cursorLocked = true;
+        private bool qPressed = false;
+
+
         public Transform Transform { get; private set; }
         public Transform FollowTransform { get; private set; }
 
@@ -60,7 +64,10 @@ namespace KinematicCharacterController.Examples
             DefaultDistance = Mathf.Clamp(DefaultDistance, MinDistance, MaxDistance);
             DefaultVerticalAngle = Mathf.Clamp(DefaultVerticalAngle, MinVerticalAngle, MaxVerticalAngle);
         }
-
+        void Start()
+        {
+            LockCursor();
+        }
         void Awake()
         {
             Transform = this.transform;
@@ -81,8 +88,66 @@ namespace KinematicCharacterController.Examples
             _currentFollowPosition = FollowTransform.position;
         }
 
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                qPressed = !qPressed;
+                cursorLocked = !cursorLocked;
+                UpdateCursorLock();
+            }
+
+            // Only update camera movement if the cursor is locked
+            if (cursorLocked)
+            {
+                UpdateWithInput(Time.deltaTime, Input.GetAxis("Mouse ScrollWheel"), new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f));
+            }
+        }
+
+        private void UpdateCursorLock()
+        {
+            Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !cursorLocked;
+            if (cursorLocked)
+            {
+                LockCursor();
+            }
+        }
+
+        private void LockCursor()
+        {
+            if (cursorLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        void LateUpdate()
+        {
+            // Check if the left mouse button is pressed and the cursor is locked
+            if (Input.GetMouseButtonDown(0) && cursorLocked)
+            {
+                // Do nothing if cursor is locked
+                return;
+            }
+
+            // Otherwise, release the cursor lock only if the left mouse button is pressed and the cursor is locked
+            if (Input.GetMouseButtonDown(0) && Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
         public void UpdateWithInput(float deltaTime, float zoomInput, Vector3 rotationInput)
         {
+
+            if (!cursorLocked)
+            {
+                return;
+            }
+
             if (FollowTransform)
             {
                 if (InvertX)

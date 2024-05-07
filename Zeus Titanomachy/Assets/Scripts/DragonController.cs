@@ -5,6 +5,7 @@ using UnityEngine;
 public class DragonController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particleEffect;
+    [SerializeField] private GameObject targetObject;
     private Animator anim;
     int IdleSimple;
     int IdleAgressive;
@@ -25,6 +26,7 @@ public class DragonController : MonoBehaviour
         {
             particleEffect.Stop();
         }
+        RotateTowardsTarget();
         anim = GetComponent<Animator>();
         IdleSimple = Animator.StringToHash("IdleSimple");
         IdleAgressive = Animator.StringToHash("IdleAgressive");
@@ -40,6 +42,12 @@ public class DragonController : MonoBehaviour
         TakeOff = Animator.StringToHash("TakeOff");
         Die = Animator.StringToHash("Die");
 
+    }
+
+    private void Update()
+    {
+        // Constantly rotate towards the target object
+        RotateTowardsTarget();
     }
 
 
@@ -96,6 +104,23 @@ public class DragonController : MonoBehaviour
     {
         anim.SetBool("IdleSimple", false);
         anim.SetBool("Die", true);
+    }
+
+    private void RotateTowardsTarget()
+    {
+        if (targetObject != null)
+        {
+            // Calculate the direction vector from the dragon to the target object
+            Vector3 targetDirection = targetObject.transform.position - transform.position;
+            targetDirection.y = 0f; // Ensure rotation only happens in the horizontal plane
+
+            // Rotate the dragon to face towards the target object
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            }
+        }
     }
 
     // Coroutine to rotate the dragon over time
