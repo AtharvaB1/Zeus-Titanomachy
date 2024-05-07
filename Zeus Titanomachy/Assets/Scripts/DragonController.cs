@@ -5,8 +5,13 @@ using UnityEngine;
 public class DragonController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particleEffect;
+    private bool isMovingY = false;
     public GameObject targetObject;
     private Animator anim;
+    public Healthbar healthBar;
+    public GameObject raytraceStarter;
+    public int currentHealth = 100;
+    private Vector3 originalPosition;
     int IdleSimple;
     int IdleAgressive;
     int IdleRestless;
@@ -26,6 +31,7 @@ public class DragonController : MonoBehaviour
         {
             particleEffect.Stop();
         }
+        originalPosition = transform.position;
         RotateTowardsTarget();
         anim = GetComponent<Animator>();
         IdleSimple = Animator.StringToHash("IdleSimple");
@@ -46,61 +52,98 @@ public class DragonController : MonoBehaviour
 
     private void Update()
     {
-        // Constantly rotate towards the target object
         RotateTowardsTarget();
     }
 
-
     // Specific actions for different checkpoints
     public void firstCheckpointAction()
+    {
+        //Move the dragon up by value
+        MoveOnYAxis(1);
+        
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
+
+        fireRaycast();
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
+    }
+
+    public void secondCheckpointAction()
+    {
+        MoveOnYAxis(1);
+
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
+
+        fireRaycast();
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
+    }
+
+    public void thirdCheckpointAction()
+    {
+        MoveOnYAxis(1);
+
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
+
+        fireRaycast();
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
+    }
+
+    public void fourthCheckpointAction()
+    {
+        MoveOnYAxis(1);
+
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
+
+        fireRaycast();
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
+    }
+
+    public void fifthCheckpointAction()
+    {
+        MoveOnYAxis(1);
+
+        // Trigger the animation
+        anim.SetBool("Drakaris", true);
+        particleEffect.Play();
+
+        fireRaycast();
+
+        // Wait for 1 second
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
+    }
+
+    public void sixthCheckpointAction()
     {
         // Trigger the animation
         anim.SetBool("Drakaris", true);
         particleEffect.Play();
 
+        fireRaycast();
+
         // Wait for 1 second
-        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 2f));
-    }
-
-    public void secondCheckpointAction()
-    {
-        // Example: Trigger specific animation or action for the second checkpoint
-        Debug.Log("Performing action for second checkpoint");
-        // Add your specific actions here
-    }
-
-    public void thirdCheckpointAction()
-    {
-        // Example: Trigger specific animation or action for the third checkpoint
-        Debug.Log("Performing action for third checkpoint");
-        // Add your specific actions here
-    }
-
-    public void fourthCheckpointAction()
-    {
-        // Example: Trigger specific animation or action for the fourth checkpoint
-        Debug.Log("Performing action for fourth checkpoint");
-        // Add your specific actions here
-    }
-
-    public void fifthCheckpointAction()
-    {
-        // Example: Trigger specific animation or action for the fifth checkpoint
-        Debug.Log("Performing action for fifth checkpoint");
-        // Add your specific actions here
-    }
-
-    public void sixthCheckpointAction()
-    {
-        // Example: Trigger specific animation or action for the sixth checkpoint
-        Debug.Log("Performing action for sixth checkpoint");
-        // Add your specific actions here
+        StartCoroutine(ReturnToIdleSimpleAfterDelay("Drakaris", 1f));
     }
 
     public void dieKekw()
     {
         anim.SetBool("IdleSimple", false);
         anim.SetBool("Die", true);
+        MoveToOriginalPosition(2f);
     }
 
     private void RotateTowardsTarget()
@@ -120,6 +163,69 @@ public class DragonController : MonoBehaviour
         }
     }
 
+    public void MoveOnYAxis(float duration)
+    {
+        if (!isMovingY)
+        {
+            isMovingY = true;
+            Vector3 startPosition = transform.position;
+            Vector3 targetPosition = new Vector3(transform.position.x, targetObject.transform.position.y, transform.position.z);
+            StartCoroutine(MoveCoroutine(startPosition, targetPosition, duration));
+        }
+    }
+
+    IEnumerator MoveCoroutine(Vector3 startPosition, Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        isMovingY = false;
+    }
+
+    private void fireRaycast()
+    {
+        // Calculate the direction towards the targetObject
+        Vector3 direction = (targetObject.transform.position - raytraceStarter.transform.position).normalized;
+
+        // Loop through 10 times to shoot 10 different raycasts
+        for (int i = 0; i < 10; i++)
+        {
+            // Calculate the rotation offset based on the iteration count
+            Quaternion rotationOffset = Quaternion.Euler(Random.insideUnitSphere * 5f);
+
+            // Create a ray from the raytraceStarter GameObject's position towards the targetObject with the rotation offset
+            Ray ray = new Ray(raytraceStarter.transform.position, rotationOffset * direction);
+
+            // Declare a RaycastHit variable to store information about the hit object
+            RaycastHit hit;
+
+            // Check if the ray hits something
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Check if the hit object has the "Player" tag
+                if (hit.collider.CompareTag("Player"))
+                {
+                    // Subtract 10 from the currentHealth variable
+                    currentHealth -= 15;
+                    healthBar.updateHealthBar(100, currentHealth);
+
+                    // Output the new health value to the console (optional)
+                    Debug.Log("Player hit! Current health: " + currentHealth);
+
+                    // Exit the loop to ensure only the first hit counts
+                    break;
+                }
+            }
+        }
+    }
+
     // Coroutine to stop the "Hover" animation after a delay
     private IEnumerator ReturnToIdleSimpleAfterDelay(string orig, float delay)
     {
@@ -131,6 +237,19 @@ public class DragonController : MonoBehaviour
         anim.SetBool(orig, false);
         anim.SetBool("IdleSimple", true);
 
+    }
+
+    public void MoveToOriginalPosition(float duration)
+    {
+        // Check if the dragon is not already moving
+        if (!isMovingY)
+        {
+            // Set the dragon as moving
+            isMovingY = true;
+
+            // Start coroutine to move the dragon
+            StartCoroutine(MoveCoroutine(transform.position, originalPosition, duration));
+        }
     }
 }
 

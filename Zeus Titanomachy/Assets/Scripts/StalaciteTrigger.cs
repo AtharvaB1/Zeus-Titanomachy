@@ -57,7 +57,7 @@ public class StalaciteTrigger : MonoBehaviour
                 isMoving = false;
             }
         }
-        if (stalactite.transform.position.y < -10f)
+        if (stalactite.transform.position.y < 80f)
         {
             // Play the dieKekw animation
             dragon.targetObject = null;

@@ -20,6 +20,6 @@ public class Healthbar : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
+        //transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
     }
 }

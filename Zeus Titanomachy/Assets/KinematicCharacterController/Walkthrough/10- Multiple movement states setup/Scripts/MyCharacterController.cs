@@ -98,7 +98,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
             }
             if (Input.GetKeyDown(KeyCode.R))
             dash(dashCool);
-            Debug.Log(dashCool);
+            //Debug.Log(dashCool);
             if (!slowboi)
             {
                 if (Input.GetKey(KeyCode.LeftShift))
