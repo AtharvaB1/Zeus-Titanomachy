@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ConversationTrigger : MonoBehaviour
 {
-    [SerializeField] private NPCConversation myConversation;
+    public NPCConversation myConversation;
 
     private void OnTriggerStay(Collider other)
     {
