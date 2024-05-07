@@ -96,7 +96,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
                 dashCool -= Time.deltaTime;
                 dashing -= Time.deltaTime;
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.R))
             dash(dashCool);
             Debug.Log(dashCool);
             if (!slowboi)
