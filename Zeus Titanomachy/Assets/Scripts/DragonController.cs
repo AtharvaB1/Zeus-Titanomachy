@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragonController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem particleEffect;
-    [SerializeField] private GameObject targetObject;
+    public GameObject targetObject;
     private Animator anim;
     int IdleSimple;
     int IdleAgressive;

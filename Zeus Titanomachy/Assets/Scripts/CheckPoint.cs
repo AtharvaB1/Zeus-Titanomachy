@@ -69,8 +69,8 @@ public class CheckPoint : MonoBehaviour
 
     private IEnumerator MovePathGroupDelayed(Transform pathGroup, int pathIndex)
     {
-        float delayDuration = 7f; // Delay duration before starting movement
-        float fallingDuration = 4f; // Total time for the path group to fall
+        float delayDuration = 6f; // Delay duration before starting movement
+        float fallingDuration = 3f; // Total time for the path group to fall
         float elapsedTime = 0f; // Time elapsed since start of coroutine
 
         // Wait for the delay duration before starting the movement

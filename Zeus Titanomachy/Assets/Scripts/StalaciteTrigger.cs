@@ -60,6 +60,7 @@ public class StalaciteTrigger : MonoBehaviour
         if (stalactite.transform.position.y < -10f)
         {
             // Play the dieKekw animation
+            dragon.targetObject = null;
             dragon.dieKekw();
         }
     }

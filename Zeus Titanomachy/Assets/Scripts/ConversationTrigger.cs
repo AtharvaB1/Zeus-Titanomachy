@@ -6,6 +6,7 @@ using UnityEngine;
 public class ConversationTrigger : MonoBehaviour
 {
     public NPCConversation myConversation;
+    [SerializeField] private GameObject textToDelete;
 
     private void OnTriggerStay(Collider other)
     {
@@ -14,6 +15,7 @@ public class ConversationTrigger : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.F))
             {
                 ConversationManager.Instance.StartConversation(myConversation);
+                textToDelete.SetActive(false);
             }
         }
     }
