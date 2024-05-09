@@ -38,4 +38,6 @@ public class BirdController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(Vector3.right * Pitch + Vector3.left * pitch + Vector3.forward * roll);
 
     }
+    
+
 }
