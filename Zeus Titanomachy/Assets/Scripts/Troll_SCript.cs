@@ -9,6 +9,8 @@ public class Troll_SCript : MonoBehaviour
     BoxCollider boxCollider;
     MeshCollider mace;
     public float speed = 10f;
+    public GameObject MC;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,6 @@ public class Troll_SCript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+            this.gameObject.transform.LookAt(MC.transform.position);
     }
 }

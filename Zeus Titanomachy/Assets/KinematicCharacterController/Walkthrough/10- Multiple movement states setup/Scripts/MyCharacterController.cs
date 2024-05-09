@@ -87,6 +87,11 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
         {
             animator.SetFloat("front", Input.GetAxis("Vertical"));
             animator.SetFloat("side", Input.GetAxis("Horizontal"));
+            if (animator.GetFloat("front") == 0 && animator.GetFloat("side") == 0)
+                animator.SetBool("still", true);
+            else
+                animator.SetBool("still", false);
+
             if (dashing <= 0)
             {
                 animator.SetBool("dash", false);
