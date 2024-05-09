@@ -20,6 +20,6 @@ public class MineTPSCRIPT : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(0, 0, 1) * m_Speed * Time.deltaTime;
+        transform.Translate(-Vector3.forward * m_Speed * Time.deltaTime);
     }
 }
