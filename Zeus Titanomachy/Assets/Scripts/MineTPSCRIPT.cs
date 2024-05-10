@@ -7,7 +7,7 @@ public class MineTPSCRIPT : MonoBehaviour
 {
     [SerializeField] Transform respawnPoint;
     Rigidbody rgbdy;
-    int m_Speed = 50;
+    public int m_Speed = 50;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +20,6 @@ public class MineTPSCRIPT : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(-Vector3.forward * m_Speed * Time.deltaTime);
+        transform.Translate(new Vector3(0,-1,0) * m_Speed * Time.deltaTime);
     }
 }
