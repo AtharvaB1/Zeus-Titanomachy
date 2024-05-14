@@ -140,7 +140,7 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
                 animator.InterruptMatchTarget();
                 animator.SetBool("dash", true);
                 dashing = 0.4f;
-                dashCool = 5f;
+                dashCool = 3f;
             }
             
         }
