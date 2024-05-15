@@ -74,6 +74,8 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
         public float dashCool = 0f;
         public bool slowboi;
         public float dashing = 0f;
+        Rigidbody rb;
+        CapsuleCollider capsuleCollider;
         private void Start()
         {
             // Assign to motor
@@ -82,6 +84,8 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
             // Handle initial state
             TransitionToState(CharacterState.Default);
             animator = GetComponent<Animator>();
+            rb = GetComponent<Rigidbody>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
         }
         private void Update()
         {
@@ -95,7 +99,9 @@ namespace KinematicCharacterController.Walkthrough.MultipleMovementStates
             if (dashing <= 0)
             {
                 animator.SetBool("dash", false);
-            }
+                capsuleCollider.enabled = true;
+            } else
+            capsuleCollider.enabled= false;
             if (dashCool>0)
             {
                 dashCool -= Time.deltaTime;

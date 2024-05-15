@@ -7,7 +7,6 @@ public class TrollMace : MonoBehaviour
 {
     MeshCollider MeshCollider;
     public float dCool = 1.5f;
-    public float health = 100f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +16,9 @@ public class TrollMace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         dCool-= Time.deltaTime;
-        if (health <= 0)
-        {
-            SceneManager.LoadScene(5);
-        }
+       
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -29,8 +26,8 @@ public class TrollMace : MonoBehaviour
         {
             if (dCool <= 0)
             {
-                dCool = 1.5f;
-                health -= 25;
+                dCool = 1f;
+                lvl3Health.zHealth -= 25;
             }
         }
     }
