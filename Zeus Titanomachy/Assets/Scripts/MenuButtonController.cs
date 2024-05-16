@@ -20,7 +20,7 @@ public class MenuButtonController : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Return) && index == 0)
         {
-            SceneManager.LoadScene("DrFight");
+            SceneManager.LoadScene(1);
         }
         if (Input.GetKeyDown(KeyCode.Return) && index == 2)
         {

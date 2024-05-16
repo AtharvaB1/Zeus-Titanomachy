@@ -12,6 +12,7 @@ public class CheckPoint : MonoBehaviour
     public ParticleSystem particles;      // Reference to the ParticleSystem
     private bool particleSystemActivated = false;
     public GameObject restartColliderObject;
+    
 
     // Dictionary to map path group index to specific falling amount
     private Dictionary<int, float> pathFallingAmounts = new Dictionary<int, float>()

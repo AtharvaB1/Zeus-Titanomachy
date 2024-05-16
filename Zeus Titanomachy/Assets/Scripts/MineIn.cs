@@ -20,8 +20,8 @@ public class MineIn : MonoBehaviour
         if (collision != null) {
             if(collision.gameObject.name == "Zeus")
             {
-                SceneManager.LoadScene(1);
-                SceneManager.GetSceneAt(1);
+                SceneManager.LoadScene(2);
+                SceneManager.GetSceneAt(2);
                 //cant remember which one did what, pls fix if broke
             }
         }

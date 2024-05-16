@@ -26,7 +26,7 @@ public class MineWallsCollidr : MonoBehaviour
         if(this.gameObject.tag == "teleport" && other.gameObject.tag == "lb_bird")
         {
             Debug.Log("TP");
-            SceneManager.LoadScene("Mine");
+            SceneManager.LoadScene(5);
         }else if(this.gameObject.tag == " helment" && other.gameObject.tag == "lb_bird")
         {
             Debug.Log("Helment");

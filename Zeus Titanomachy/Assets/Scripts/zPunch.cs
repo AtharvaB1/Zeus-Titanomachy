@@ -8,6 +8,7 @@ public class zPunch : MonoBehaviour
     public GameObject zes;
     Animator animator;
     public float pCool = 1f;
+    public AudioSource audioS;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class zPunch : MonoBehaviour
         {
             if (pCool <= 0f)
             {
+                audioS.Play();
                 if (other.gameObject.name == "troll1")
                 {
                     Debug.Log("SII");

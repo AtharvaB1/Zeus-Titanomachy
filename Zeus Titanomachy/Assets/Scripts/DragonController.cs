@@ -132,7 +132,6 @@ public class DragonController : MonoBehaviour
         // Trigger the animation
         anim.SetBool("Drakaris", true);
         particleEffect.Play();
-
         fireRaycast();
 
         // Wait for 1 second
